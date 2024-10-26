@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Evaluate Rule{% endblock %}
+
+{% block extra_css %}
+<style>
+    .evaluation-form {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .data-input {
+        width: 100%;
+        min-height: 150px;
+        margin: 1rem 0;
+        padding: 1rem;
+        font-family: monospace;
+    }
+
+    .result-panel {
+        margin-top: 2rem;
+        padding: 1rem;
+        border-radius: 4px;
+    }
+
+    .result-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+    }
+
+    .result-failure {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="evaluation-form">
+    <h2>Evaluate Rule</h2>
+    
+    <form id="evaluate-form">
+        <div class="form-group">
+            <label for="data-input">Enter User Data (JSON format):</label>
+            <textarea id="data-input" class="data-input" placeholder='{
+    "age": 35,
+    "department": "Sales",
+    "salary": 60000,
+    "experience": 3
+}'></textarea>
+        </div>
+
+        <div class="form-group">
+            <h3>Stored Rule:</h3>
+            <pre id="stored-rule" class="rule-display">No rule loaded</pre>
+            <button type="button" id="load-rule" class="btn btn-secondary">Load Last Created Rule</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Evaluate</button>
+    </form>
+
+    <div id="result" class="result-panel"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/evaluate.js') }}"></script>
+{% endblock %}
